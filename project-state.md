@@ -12,14 +12,16 @@ Last updated: 2026-09-12
   main triggers a build.
 - The Next.js App Router app is scaffolded and the production deployment
   builds successfully.
-- Slice 1 (Accounts) is built, on branch claude/great-feynman-r73hbs, PR
-  open: sign up at /signup, log in at /login with a red-text error on
-  failure, log out from /tasks, and the session persists in cookies
-  across closing the tab. A proxy (Next's middleware convention, renamed
-  per Next 16) redirects signed-out visitors away from /tasks to /login;
-  / redirects to /tasks or /login depending on session state. /tasks
-  itself is still a placeholder header (email + Log out); the task list
-  is slice 2.
+- On the live site, a visitor can go to /signup, enter an email and
+  password, and is immediately signed in and taken to /tasks (email
+  confirmation is off in Supabase). /tasks shows that person's email in
+  the header and a Log out button; clicking it signs them out and sends
+  them to /login. Trying to open /tasks while signed out sends them to
+  /login instead. Entering the right email with the wrong password on
+  /login keeps them on that page and shows a red error message. After
+  logging in, closing the tab and reopening the site returns them
+  straight to /tasks without asking for the password again. The /tasks
+  page has no task list yet, just the header — that's slice 2.
 
 ## Broken or flaky
 - `npm run lint` fails ("Invalid project directory") because Next.js
