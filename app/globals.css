@@ -10,19 +10,8 @@ body {
 
 body {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #0b3d2e 0%, #34d399 100%);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
-}
-
-.name {
-  margin: 0;
-  color: #ffffff;
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-align: center;
+  color: #111111;
+  background: #f7f7f5;
 }
