@@ -29,7 +29,7 @@ language. "Remind" means these on-page sections, not push notifications.
        /login and shows visible red text naming the failure.
    (d) Log in correctly, close the tab, reopen the site URL; /tasks opens
        without asking for a password again.
-   | status: ACTIVE
+   | status: DONE
 
 2. Tasks that persist | done-criteria:
    (a) On /tasks, type "Buy milk" and submit; "Buy milk" appears in the list
@@ -39,7 +39,7 @@ language. "Remind" means these on-page sections, not push notifications.
        text struck through, and stays there after a reload.
    (d) In a second private window, sign up as a different email; that
        account's list shows zero tasks and "Buy milk" is nowhere on the page.
-   | status: pending
+   | status: ACTIVE
 
 3. Japanese and quiz mode | done-criteria:
    (a) Add a task with English title "Buy milk", Japanese title
