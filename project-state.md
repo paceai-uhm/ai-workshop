@@ -6,8 +6,10 @@ Last updated: 2026-09-12
   ("Initial commit"), one file (README.md).
 - Supabase project exists and is healthy: name "ai-workshop", ref
   jcfkqthzvsnkggmczgbt, region us-west-1, Postgres 17.6, created
-  2026-09-08. No tables yet; auth users will exist once people sign up
-  through the app.
+  2026-09-08. A `tasks` table was added by hand in the SQL Editor for
+  slice 2 (id, user_id, title, completed, created_at), with RLS enabled
+  and select/insert/update policies scoped to auth.uid() = user_id. Auth
+  users will exist once people sign up through the app.
 - The Vercel project ("ai-workshop") is linked to the repo, so a push to
   main triggers a build.
 - The Next.js App Router app is scaffolded and the production deployment
@@ -20,8 +22,14 @@ Last updated: 2026-09-12
   /login instead. Entering the right email with the wrong password on
   /login keeps them on that page and shows a red error message. After
   logging in, closing the tab and reopening the site returns them
-  straight to /tasks without asking for the password again. The /tasks
-  page has no task list yet, just the header — that's slice 2.
+  straight to /tasks without asking for the password again. On /tasks, a
+  form adds a task by title (client-side insert via Supabase, no full
+  page reload, input clears on success); tasks render in a "Tasks"
+  section, and checking a task's box moves it to a "Completed" section
+  with its title struck through. Both the initial list and every toggle
+  are persisted in the `tasks` table, so a reload keeps state, and RLS
+  means each account only ever sees its own rows. Due dates, Japanese
+  titles, and the Overdue/Due today/Later sort are slice 3.
 
 ## Broken or flaky
 - `npm run lint` fails ("Invalid project directory") because Next.js
@@ -51,5 +59,7 @@ Last updated: 2026-09-12
   Push notifications are out of scope and sit in the roadmap backlog.
 
 ## Next session
-1. Get slice 1's PR merged, mark it done in roadmap.md.
-2. Start slice 2 (Tasks that persist).
+1. Run the slice 2 SQL (see the "Slice 2" PR description) in the Supabase
+   SQL Editor before the deployed preview will work, then verify slice
+   2's done-criteria on the preview URL and mark it done in roadmap.md.
+2. Start slice 3 (Japanese and quiz mode).

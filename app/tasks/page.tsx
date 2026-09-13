@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import LogoutButton from "./logout-button";
+import TaskList from "./task-list";
 import styles from "./page.module.css";
 
 export default async function TasksPage() {
@@ -13,6 +14,11 @@ export default async function TasksPage() {
     redirect("/login");
   }
 
+  const { data: tasks } = await supabase
+    .from("tasks")
+    .select("id, title, completed")
+    .order("created_at", { ascending: true });
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -20,7 +26,7 @@ export default async function TasksPage() {
         <LogoutButton />
       </header>
       <main>
-        <p>Tasks are coming in the next slice.</p>
+        <TaskList userId={user.id} initialTasks={tasks ?? []} />
       </main>
     </div>
   );
