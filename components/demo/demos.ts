@@ -29,6 +29,14 @@ export const DEMOS: Demo[] = [
     tier: 1,
     capabilities: ["client state", "URL as state", "debouncing"],
   },
+  {
+    slug: "live-data",
+    title: "Live data with caching",
+    blurb:
+      "Today's high and low tides for Honolulu Harbour, fetched from NOAA on the server, cached for ten minutes, with a switch that breaks the request on purpose.",
+    tier: 1,
+    capabilities: ["server components", "fetch caching", "failure handling"],
+  },
 ];
 
 export function getDemo(slug: string): Demo {
