@@ -52,7 +52,37 @@ language. "Remind" means these on-page sections, not push notifications.
        English only.
    (d) With quiz mode on, click "Show answer" on a Japanese-only row; the
        English title appears in that same row without the page navigating.
-   | status: ACTIVE
+   | status: DONE
+
+## Workshop demo site
+
+A second thing living in the same repo: a set of teaching pages at /demos,
+each a working example of one capability a website can have, plus how it was
+built and the prompt that would build it again. The audience is non-engineers
+who have just built their first static page. The task list above is my own
+project; this is the curriculum.
+
+D1. Shared demo chrome and tier 1 | done-criteria:
+    (a) /demos lists every demo as a card with its title, one-sentence
+        description, tier, and the capabilities it introduces.
+    (b) /demos/live-search shows 40 seeded items. Typing narrows the list
+        immediately; the web address updates a moment later; copying that
+        address into a new tab opens the same filtered view.
+    (c) On /demos/live-search, checking nothing in a facet group leaves the
+        list unrestricted, and checking boxes in both groups narrows by both.
+    (d) /demos/live-data shows today's Honolulu tides from NOAA with a
+        visible "last updated" line, and a link that breaks the request on
+        purpose so the error panel can be seen; when broken, the rest of the
+        page still renders.
+    (e) Every demo page shows the same three parts in the same order: the
+        working thing, "How this works", "Build it yourself".
+    | status: ACTIVE
+
+D2. Tier 2 — database demos (guestbook, upload, account) | status: pending
+D3. Tier 3 — realtime, aggregation, AI (live-poll, dashboard, ask)
+    | status: pending
+    | note: dashboard needs a chart library and ask needs an AI dependency
+      plus an API key. Both need a decision before they start.
 
 ## Backlog
 - Browser push or email notifications, and any background scheduler
