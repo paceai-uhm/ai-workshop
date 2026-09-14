@@ -1,5 +1,5 @@
 # Project state
-Last updated: 2026-09-14
+Last updated: 2026-09-14 (second pass)
 
 ## Works
 - GitHub repo exists and is public: paceai-uhm/ai-workshop.
@@ -30,6 +30,15 @@ Last updated: 2026-09-14
   place, without navigating.
 - Migrations now live in the repo under supabase/migrations and the
   Supabase migration history is no longer empty.
+- Slice 3 is merged (PR #6). Slice 3's roadmap status is DONE.
+- The workshop demo site has started at /demos. Shared chrome lives in
+  components/demo (DemoShell, HowItWorks, TryThisPrompt, and demos.ts as
+  the single registry of title/blurb/tier/capabilities). Two tier 1 demos
+  are in: /demos/live-search (40 seeded reef fish, filter-as-you-type,
+  sort, two multi-select facet groups, filters mirrored into the query
+  string) and /demos/live-data (NOAA tide predictions for Honolulu
+  Harbour, fetched server-side, 600s revalidate, reachable error state via
+  ?fail=1).
 
 ## Broken or flaky
 - `npm run lint` fails ("Invalid project directory") because Next.js
@@ -45,13 +54,22 @@ Last updated: 2026-09-14
   because it changes instruction-file behaviour and is Timothy's call.
 
 ## Not yet verified
-- Slice 2 and slice 3 have NOT been checked against their done-criteria on
-  the deployed URL by a human. The `tasks` table held zero rows as of
-  2026-09-14, so nobody has added a task through the live site yet.
-- The add-a-task and check-off round trips were exercised only against
-  placeholder Supabase credentials in a local production build, so the
-  rendering, grouping, quiz and reveal behaviour is verified but the live
-  insert/update path is not.
+- Slice 2 and slice 3 were merged without a reported human pass over their
+  done-criteria on the deployed URL. The `tasks` table held zero rows as of
+  2026-09-14, so nobody had added a task through the live site at that
+  point. The add-a-task and check-off round trips have still only been
+  exercised against placeholder Supabase credentials in a local production
+  build.
+- /demos/live-data's SUCCESS path is unverified. This container's network
+  policy answers 403 to every outbound host except a short allowlist, so
+  NOAA (and every other third-party API) is unreachable from here. Only the
+  failure path could be exercised locally — which it was, thoroughly, since
+  every fetch fails here. Whether real tide data renders correctly needs a
+  look at the deployed page.
+- The deployed preview URL is also unreachable from this container for the
+  same reason, and Vercel preview deployments additionally sit behind
+  Vercel Authentication. Verification on a deployed URL has to happen in
+  Timothy's browser.
 
 ## Environment notes
 - Stack: Next.js App Router, TypeScript, plain CSS, Supabase, Vercel.
@@ -74,9 +92,24 @@ Last updated: 2026-09-14
 - "Remind" is scoped to on-page Overdue / Due today / Later sections.
   Push notifications are out of scope and sit in the roadmap backlog.
 
+## Open decisions
+- roadmap.md now carries the demo site as its own section (D1-D3)
+  ALONGSIDE the task list, rather than replacing it. Two products in one
+  roadmap is a compromise; rewriting roadmap.md so the demo site is the
+  project would be cleaner, but that deletes Timothy's framing and is his
+  call, not an agent's.
+- components/ is a new top-level folder, which CLAUDE.md forbids, the same
+  way supabase/ was in slice 3. CLAUDE.md needs reconciling: it currently
+  forbids new top-level folders while also requiring supabase/migrations.
+- D3 needs two decisions before it starts: a chart library for the
+  dashboard demo, and an AI dependency plus an API key for the ask demo.
+  A public teaching site with a paid key on it wants a spend cap agreed
+  first.
+
 ## Next session
-1. Verify slice 3's done-criteria on the deployed URL, and slice 2's while
-   you are there, then mark slice 3 done in roadmap.md.
-2. Decide whether the demo-pages teaching site becomes the project. It is
-   not in roadmap.md at all today, so it cannot be worked on under
-   CLAUDE.md's "only the ACTIVE slice" rule until the roadmap says so.
+1. Look at /demos, /demos/live-search and /demos/live-data on the deployed
+   URL and correct the teaching voice once, before tier 2 multiplies it
+   across six more pages.
+2. Verify slice 2 and slice 3's done-criteria on the deployed URL.
+3. Then start D2 (tier 2 database demos), which needs migrations for the
+   guestbook and a storage bucket for uploads.
