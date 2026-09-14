@@ -20,7 +20,16 @@ export const TIER_LABELS: Record<Tier, string> = {
   3: "Tier 3 · realtime, aggregation, AI",
 };
 
-export const DEMOS: Demo[] = [];
+export const DEMOS: Demo[] = [
+  {
+    slug: "live-search",
+    title: "Instant filter & sort",
+    blurb:
+      "Type to narrow a list of 40 reef fish, sort it, and filter by habitat — the web address updates so you can share exactly what you are looking at.",
+    tier: 1,
+    capabilities: ["client state", "URL as state", "debouncing"],
+  },
+];
 
 export function getDemo(slug: string): Demo {
   const demo = DEMOS.find((d) => d.slug === slug);
