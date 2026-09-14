@@ -39,7 +39,7 @@ language. "Remind" means these on-page sections, not push notifications.
        text struck through, and stays there after a reload.
    (d) In a second private window, sign up as a different email; that
        account's list shows zero tasks and "Buy milk" is nowhere on the page.
-   | status: ACTIVE
+   | status: DONE
 
 3. Japanese and quiz mode | done-criteria:
    (a) Add a task with English title "Buy milk", Japanese title
@@ -52,7 +52,7 @@ language. "Remind" means these on-page sections, not push notifications.
        English only.
    (d) With quiz mode on, click "Show answer" on a Japanese-only row; the
        English title appears in that same row without the page navigating.
-   | status: pending
+   | status: ACTIVE
 
 ## Backlog
 - Browser push or email notifications, and any background scheduler

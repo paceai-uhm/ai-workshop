@@ -1,18 +1,37 @@
 .form {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* The English title gets its own row; Japanese, date and Add share the next. */
+.inputPrimary {
+  flex: 1 1 100%;
 }
 
 .input {
-  flex: 1;
+  flex: 1 1 8rem;
+  min-width: 0;
   padding: 0.5rem 0.65rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
+.dateInput {
+  flex: 0 1 10rem;
+  min-width: 0;
+  padding: 0.45rem 0.65rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #ffffff;
+  color: inherit;
+}
+
 .button {
+  flex: 0 0 auto;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border: none;
@@ -31,6 +50,29 @@
   color: #c0392b;
   font-size: 0.9rem;
   margin: 0 0 1rem;
+}
+
+.quizBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.quizToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.quizHint {
+  font-size: 0.8rem;
+  color: #666;
 }
 
 .section {
@@ -55,16 +97,65 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
+}
+
+.checkbox {
+  /* Nudge down so it lines up with the first line of a two-line title. */
+  margin-top: 0.25rem;
+  flex: 0 0 auto;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.secondaryTitle {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.revealButton {
+  margin-top: 0.1rem;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.8rem;
+  border: 1px solid #0b3d2e;
+  border-radius: 999px;
+  background: transparent;
+  color: #0b3d2e;
+  cursor: pointer;
 }
 
 .completedText {
   text-decoration: line-through;
   color: #888;
+}
+
+.dueDate {
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  color: #666;
+  white-space: nowrap;
+  margin-top: 0.15rem;
+}
+
+.dueDateLate {
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  color: #c0392b;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-top: 0.15rem;
 }
