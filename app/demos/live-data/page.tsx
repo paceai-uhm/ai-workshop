@@ -22,6 +22,7 @@ Requirements:
 - Cache the response with a revalidate window of 600 seconds, so repeat visitors get the cached copy and NOAA gets one request per ten minutes instead of one per visitor.
 - Show a real loading state using Suspense with a skeleton, not a spinner that never appears.
 - Show a "last updated" line. Read the timestamp off the fetch response's Date header, NOT from new Date() at render time. This matters: the page re-renders per request while the data stays cached, so a render-time clock would tick forward and claim the data is fresher than it is.
+- Format that timestamp in the station's own timezone (Pacific/Honolulu), not GMT. The header arrives as GMT, and printing it raw shows a reader in Hawaii a time up to ten hours ahead of their own clock -- after 2pm local, tomorrow's date -- on a page whose entire subject is Honolulu. Take the timezone as a parameter so the fix travels if the station does.
 - Make the error state genuinely reachable: add a ?fail=1 switch that points the fetch at an invalid station id so NOAA returns an error. The page must show a visible link to turn the breakage on and off. A fallback you cannot demonstrate is not a fallback.
 
 Handle these failure modes explicitly, and put the parsing in a separate pure function so each can be tested without a network:
@@ -70,8 +71,10 @@ export default async function LiveDataPage({
             </>,
             <>
               &ldquo;Last updated&rdquo; is read from the response itself, not
-              from the clock when the page was drawn. Otherwise it would creep
-              forward on every reload and claim the data was newer than it was.
+              from the clock when the page was drawn, and it is shown in
+              Honolulu time. Read straight from the header it would say
+              &ldquo;GMT&rdquo; and, for most of the afternoon here, tomorrow&rsquo;s
+              date — on a page about Honolulu.
             </>,
             <>
               Use the switch above to break the request on purpose. A fallback

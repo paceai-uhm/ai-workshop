@@ -1,3 +1,5 @@
+import { APP_TIME_ZONE } from "@/lib/dates";
+
 /**
  * NOAA CO-OPS tide predictions for Honolulu Harbour (station 1612340).
  *
@@ -106,4 +108,30 @@ export async function fetchTides(forceFailure: boolean): Promise<TideResult> {
   const fetchedAt = response.headers.get("date");
 
   return { tides: parseTides(await response.json()), fetchedAt };
+}
+
+/**
+ * Render the fetch timestamp in the station's own timezone.
+ *
+ * The header arrives as GMT. Shown as-is, a reader in Honolulu sees a time up
+ * to ten hours ahead of their own clock — and after 2pm local, tomorrow's
+ * date — on a page whose whole subject is Honolulu. Formatting in the app's
+ * timezone is the same fix the task list makes for due dates.
+ */
+export function formatFetchedAt(
+  header: string | null,
+  timeZone: string = APP_TIME_ZONE,
+): string | null {
+  if (!header) return null;
+  const at = new Date(header);
+  if (Number.isNaN(at.getTime())) return null;
+
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZoneName: "short",
+  }).format(at);
 }

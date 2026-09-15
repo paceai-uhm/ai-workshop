@@ -2,6 +2,7 @@ import Link from "next/link";
 import {
   REVALIDATE_SECONDS,
   fetchTides,
+  formatFetchedAt,
   formatTideTime,
 } from "./tides";
 import styles from "./tide-board.module.css";
@@ -46,6 +47,7 @@ export default async function TideBoard({ forceFailure }: { forceFailure: boolea
   }
 
   const { tides, fetchedAt } = result;
+  const updatedAt = formatFetchedAt(fetchedAt);
 
   return (
     <div className={styles.board}>
@@ -64,7 +66,7 @@ export default async function TideBoard({ forceFailure }: { forceFailure: boolea
       </ul>
       <p className={styles.status}>
         Honolulu Harbour · last updated{" "}
-        {fetchedAt ? new Date(fetchedAt).toUTCString() : "just now"} · refreshes
+        {updatedAt ?? "just now"} · refreshes
         at most every {REVALIDATE_SECONDS / 60} minutes
       </p>
     </div>
